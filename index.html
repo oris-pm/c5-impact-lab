@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RaizUp Cohort 5 - Impact Lab Groups</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+    :root {
+      --primary-cyan: #17C5E5;
+      --cyan-light: #68EDEE;
+      --navy-dark: #154EA1;
+      --accent-orange: #FCC64C;
+      --accent-red: #E03665;
+      --accent-purple: #B78CF8;
+      --dark-purple: #440999;
+      --black: #000000;
+      --bg-light: #F4F8FA;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', 'Gotham', 'Gilmer', sans-serif;
+      background-color: var(--bg-light);
+      color: #333;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Header Styling */
+    header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, #0d2f63 100%);
+      color: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 25px rgba(23, 197, 229, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+      opacity: 0.2;
+      border-radius: 50%;
+      filter: blur(50px);
+    }
+
+    .brand-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--cyan-light);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      font-size: 15px;
+      color: #d0e7ff;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+
+    /* Group Stack */
+    .groups-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Card Accordion Styling */
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      border: 1px solid #e1e9f0;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+    }
+
+    .card-header {
+      padding: 20px 24px;
+      background: var(--navy-dark);
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .group-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--cyan-light);
+    }
+
+    .toggle-icon {
+      font-size: 18px;
+      color: var(--cyan-light);
+      transition: transform 0.3s ease;
+      font-weight: 700;
+    }
+
+    .mentor-cta {
+      background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-orange) 100%);
+      color: #ffffff !important;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(224, 54, 101, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .mentor-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(224, 54, 101, 0.4);
+    }
+
+    .card-body {
+      padding: 24px;
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    .card.collapsed .card-body {
+      display: none;
+    }
+
+    .card.collapsed .toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: #8898aa;
+      margin-bottom: 12px;
+    }
+
+    .delegate-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .delegate-item {
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #edf2f7;
+      border-radius: 8px;
+      font-weight: 700;
+      color: var(--black);
+      font-size: 15px;
+    }
+
+    /* Custom Header Accent Colors per Group */
+    .card[data-group="A"] .mentor-cta { background: linear-gradient(135deg, #17C5E5, #154EA1); }
+    .card[data-group="B"] .mentor-cta { background: linear-gradient(135deg, #E03665, #FCC64C); }
+    .card[data-group="C"] .mentor-cta { background: linear-gradient(135deg, #440999, #B78CF8); }
+    .card[data-group="D"] .mentor-cta { background: linear-gradient(135deg, #17C5E5, #68EDEE); color: #000 !important; }
+    .card[data-group="F"] .mentor-cta { background: linear-gradient(135deg, #E03665, #440999); }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand-title">RaizUp Revenue Leadership Program</div>
+      <h1>Impact Lab — Cohort 5 Groups</h1>
+      <p>Click on any group to expand or collapse. Connect with your assigned mentor directly via Circle using the button on your group header.</p>
+    </header>
+
+    <div class="groups-stack">
+      
+      <!-- Group A -->
+      <div class="card" data-group="A">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="header-left">
+            <span class="toggle-icon">▼</span>
+            <div class="group-name">Group A</div>
+          </div>
+          <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=riley" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+            <span>Contact Mentor: Riley Staraj</span> ➔
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="section-label">Delegates</div>
+          <ul class="delegate-list">
+            <li class="delegate-item">Alicja Stachowiak</li>
+            <li class="delegate-item">Christiana Ioannou</li>
+            <li class="delegate-item">Damien Boynton</li>
+            <li class="delegate-item">Ewen Ketari</li>
+            <li class="delegate-item">Manon Klop</li>
+            <li class="delegate-item">Rozaan Sprinkle</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Group B -->
+      <div class="card" data-group="B">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="header-left">
+            <span class="toggle-icon">▼</span>
+            <div class="group-name">Group B</div>
+          </div>
+          <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=mari" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+            <span>Contact Mentor: Marianna Gelardi</span> ➔
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="section-label">Delegates</div>
+          <ul class="delegate-list">
+            <li class="delegate-item">Alexandra Balazs</li>
+            <li class="delegate-item">Emily Peck</li>
+            <li class="delegate-item">Jasmine Neumann</li>
+            <li class="delegate-item">Jelizaveta Goluba</li>
+            <li class="delegate-item">Thomas Purzeau</li>
+            <li class="delegate-item">Venu Rajendra</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Group C -->
+      <div class="card" data-group="C">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="header-left">
+            <span class="toggle-icon">▼</span>
+            <div class="group-name">Group C</div>
+          </div>
+          <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=chris" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+            <span>Contact Mentor: Chris Crowley</span> ➔
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="section-label">Delegates</div>
+          <ul class="delegate-list">
+            <li class="delegate-item">Anthony Hutterer</li>
+            <li class="delegate-item">George Reeves</li>
+            <li class="delegate-item">Heather Vieira</li>
+            <li class="delegate-item">Jeffry Manjarrés</li>
+            <li class="delegate-item">Lucas Dupasquier</li>
+            <li class="delegate-item">Roberto Mota</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Group D -->
+      <div class="card" data-group="D">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="header-left">
+            <span class="toggle-icon">▼</span>
+            <div class="group-name">Group D</div>
+          </div>
+          <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=bram" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+            <span>Contact Mentor: Bram van Berkel</span> ➔
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="section-label">Delegates</div>
+          <ul class="delegate-list">
+            <li class="delegate-item">Emily Di Maolo</li>
+            <li class="delegate-item">Joanna Pitlok</li>
+            <li class="delegate-item">Karina Volska</li>
+            <li class="delegate-item">Martina Cianciosi</li>
+            <li class="delegate-item">Neil MacCallum</li>
+            <li class="delegate-item">Paul Heller</li>
+            <li class="delegate-item">Sarolta Mike</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Group F -->
+      <div class="card" data-group="F">
+        <div class="card-header" onclick="toggleCard(this)">
+          <div class="header-left">
+            <span class="toggle-icon">▼</span>
+            <div class="group-name">Group F</div>
+          </div>
+          <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=fran" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+            <span>Contact Mentor: Francesco Morgante</span> ➔
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="section-label">Delegates</div>
+          <ul class="delegate-list">
+            <li class="delegate-item">Donald Hove</li>
+            <li class="delegate-item">Emily Chaffey</li>
+            <li class="delegate-item">Emma O'Reilly</li>
+            <li class="delegate-item">Rebekka Berger</li>
+            <li class="delegate-item">Sibel Sadula-Myumyun</li>
+            <li class="delegate-item">Sofia Hacklin</li>
+            <li class="delegate-item">Tracey Obery</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleCard(headerElement) {
+      const card = headerElement.parentElement;
+      card.classList.toggle('collapsed');
+    }
+  </script>
+
+</body>
+</html>
