@@ -38,7 +38,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 80vh;
+      min-height: 70vh;
     }
 
     .pw-card {
@@ -437,19 +437,28 @@
   <script>
     const CORRECT_PW = "RAIZUP_COHORT5";
 
-    // Auto-check if already logged in during this session
-    window.onload = function() {
-      if (sessionStorage.getItem('cohort5_authenticated') === 'true') {
-        showDashboard();
+    // Auto-check session on load
+    document.addEventListener("DOMContentLoaded", function () {
+      try {
+        if (sessionStorage.getItem('cohort5_authenticated') === 'true') {
+          showDashboard();
+        }
+      } catch (e) {
+        // Fallback if third-party cookies/storage are blocked inside an iframe
+        console.warn("Storage access restricted in iframe environment");
       }
-    };
+    });
 
     function validatePassword() {
-      const input = document.getElementById('pw-input').value;
+      const input = document.getElementById('pw-input').value.trim();
       const errorDiv = document.getElementById('pw-error');
       
       if (input === CORRECT_PW) {
-        sessionStorage.setItem('cohort5_authenticated', 'true');
+        try {
+          sessionStorage.setItem('cohort5_authenticated', 'true');
+        } catch (e) {
+          console.warn("Session storage disabled");
+        }
         showDashboard();
       } else {
         errorDiv.style.display = 'block';
