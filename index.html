@@ -280,4 +280,198 @@
     .card[data-group="A"] .mentor-cta { background: linear-gradient(135deg, #17C5E5, #154EA1); }
     .card[data-group="B"] .mentor-cta { background: linear-gradient(135deg, #E03665, #FCC64C); }
     .card[data-group="C"] .mentor-cta { background: linear-gradient(135deg, #440999, #B78CF8); }
-    .card[data-group="D"] .mentor-cta { background: linear-gradient(135deg, #17C5E
+    .card[data-group="D"] .mentor-cta { background: linear-gradient(135deg, #17C5E5, #68EDEE); color: #000 !important; }
+    .card[data-group="F"] .mentor-cta { background: linear-gradient(135deg, #E03665, #440999); }
+  </style>
+</head>
+<body>
+
+  <!-- Password Screen -->
+  <div id="pw-gate">
+    <div class="pw-card">
+      <h2>Impact Lab Dashboard</h2>
+      <p>Please enter the Cohort 5 password to access your group details.</p>
+      <input type="password" id="pw-input" class="pw-input" placeholder="Enter Password" onkeypress="checkEnter(event)">
+      <button class="pw-btn" onclick="validatePassword()">Access Dashboard ➔</button>
+      <div id="pw-error">Incorrect password. Please try again.</div>
+    </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div id="dashboard-content">
+    <div class="container">
+      <header>
+        <div class="brand-title">RaizUp Revenue Leadership Program</div>
+        <h1>Impact Lab — Cohort 5 Groups</h1>
+        <p>Click on any group to expand or collapse. Connect with your assigned mentor directly via Circle using the button on your group header.</p>
+      </header>
+
+      <div class="groups-stack">
+        
+        <!-- Group A -->
+        <div class="card" data-group="A">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div class="header-left">
+              <span class="toggle-icon">▼</span>
+              <div class="group-name">Group A</div>
+            </div>
+            <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=riley" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+              <span>Contact Mentor: Riley Staraj</span> ➔
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="section-label">Delegates</div>
+            <ul class="delegate-list">
+              <li class="delegate-item">Alicja Stachowiak</li>
+              <li class="delegate-item">Christiana Ioannou</li>
+              <li class="delegate-item">Damien Boynton</li>
+              <li class="delegate-item">Ewen Ketari</li>
+              <li class="delegate-item">Manon Klop</li>
+              <li class="delegate-item">Rozaan Sprinkle</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Group B -->
+        <div class="card" data-group="B">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div class="header-left">
+              <span class="toggle-icon">▼</span>
+              <div class="group-name">Group B</div>
+            </div>
+            <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=mari" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+              <span>Contact Mentor: Marianna Gelardi</span> ➔
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="section-label">Delegates</div>
+            <ul class="delegate-list">
+              <li class="delegate-item">Alexandra Balazs</li>
+              <li class="delegate-item">Emily Peck</li>
+              <li class="delegate-item">Jasmine Neumann</li>
+              <li class="delegate-item">Jelizaveta Goluba</li>
+              <li class="delegate-item">Thomas Purzeau</li>
+              <li class="delegate-item">Venu Rajendra</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Group C -->
+        <div class="card" data-group="C">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div class="header-left">
+              <span class="toggle-icon">▼</span>
+              <div class="group-name">Group C</div>
+            </div>
+            <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=chris" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+              <span>Contact Mentor: Chris Crowley</span> ➔
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="section-label">Delegates</div>
+            <ul class="delegate-list">
+              <li class="delegate-item">Anthony Hutterer</li>
+              <li class="delegate-item">George Reeves</li>
+              <li class="delegate-item">Heather Vieira</li>
+              <li class="delegate-item">Jeffry Manjarrés</li>
+              <li class="delegate-item">Lucas Dupasquier</li>
+              <li class="delegate-item">Roberto Mota</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Group D -->
+        <div class="card" data-group="D">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div class="header-left">
+              <span class="toggle-icon">▼</span>
+              <div class="group-name">Group D</div>
+            </div>
+            <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=bram" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+              <span>Contact Mentor: Bram van Berkel</span> ➔
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="section-label">Delegates</div>
+            <ul class="delegate-list">
+              <li class="delegate-item">Emily Di Maolo</li>
+              <li class="delegate-item">Joanna Pitlok</li>
+              <li class="delegate-item">Karina Volska</li>
+              <li class="delegate-item">Martina Cianciosi</li>
+              <li class="delegate-item">Neil MacCallum</li>
+              <li class="delegate-item">Paul Heller</li>
+              <li class="delegate-item">Sarolta Mike</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Group F -->
+        <div class="card" data-group="F">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div class="header-left">
+              <span class="toggle-icon">▼</span>
+              <div class="group-name">Group F</div>
+            </div>
+            <a href="https://rlp-128e27.circle.so/members?filters%5B0%5D%5Bid%5D=contact_search&filters%5B0%5D%5Bkey%5D=contact_search&filters%5B0%5D%5Bvalue%5D=fran" target="_blank" class="mentor-cta" onclick="event.stopPropagation()">
+              <span>Contact Mentor: Francesco Morgante</span> ➔
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="section-label">Delegates</div>
+            <ul class="delegate-list">
+              <li class="delegate-item">Donald Hove</li>
+              <li class="delegate-item">Emily Chaffey</li>
+              <li class="delegate-item">Emma O'Reilly</li>
+              <li class="delegate-item">Rebekka Berger</li>
+              <li class="delegate-item">Sibel Sadula-Myumyun</li>
+              <li class="delegate-item">Sofia Hacklin</li>
+              <li class="delegate-item">Tracey Obery</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CORRECT_PW = "RAIZUP_COHORT5";
+
+    // Auto-check if already logged in during this session
+    window.onload = function() {
+      if (sessionStorage.getItem('cohort5_authenticated') === 'true') {
+        showDashboard();
+      }
+    };
+
+    function validatePassword() {
+      const input = document.getElementById('pw-input').value;
+      const errorDiv = document.getElementById('pw-error');
+      
+      if (input === CORRECT_PW) {
+        sessionStorage.setItem('cohort5_authenticated', 'true');
+        showDashboard();
+      } else {
+        errorDiv.style.display = 'block';
+      }
+    }
+
+    function checkEnter(event) {
+      if (event.key === 'Enter') {
+        validatePassword();
+      }
+    }
+
+    function showDashboard() {
+      document.getElementById('pw-gate').style.display = 'none';
+      document.getElementById('dashboard-content').style.display = 'block';
+    }
+
+    function toggleCard(headerElement) {
+      const card = headerElement.parentElement;
+      card.classList.toggle('collapsed');
+    }
+  </script>
+
+</body>
+</html>
